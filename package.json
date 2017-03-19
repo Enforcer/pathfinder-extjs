@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "casperjs": "^1.1.3",
+    "phantomjs": "^2.1.7"
+  }
+}
