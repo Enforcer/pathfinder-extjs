@@ -1,6 +1,6 @@
 var pathfinder = require('../extjs-pathfinder');
 
-casper.test.begin('Ext4 simple assertions test', 3, function suite(test) {
+casper.test.begin('Ext4 simple assertions test', 4, function suite(test) {
     var site = 'https://docs.sencha.com/extjs/4.2.3/extjs-build/examples/build/KitchenSink/ext-theme-neptune/#basic-buttons';
     var buttons;
     var firstButton
@@ -11,6 +11,8 @@ casper.test.begin('Ext4 simple assertions test', 3, function suite(test) {
         pathfinderObj = pathfinder.brief(this, function () {
             return Ext;
         });
+
+        casper.test.assert(this.getTitle() == 'Ext JS Kitchen Sink - Basic Buttons', 'Unexpected page title');
 
         buttons = pathfinderObj.find('button');
         // basic assertion that checks presence
