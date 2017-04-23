@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ext JS 4 Test Page</title>
+<link rel="stylesheet" media="screen" href="https://cdn.sencha.com/ext/gpl/4.2.1/packages/ext-theme-classic/build/resources/ext-theme-classic-all.css">
+<script src="https://cdn.sencha.com/ext/gpl/4.2.1/ext-all.js"></script>
+<script>
+Ext.onReady(function () {
+    Ext.application({
+        name : 'Ext4 01',
+
+        launch : function() {
+        }
+    });
+    window.Ext = Ext;
+
+    var win = Ext.create('Ext.window.Window', {
+        title: 'Example window'
+    });
+
+    var panel = Ext.create('Ext.panel.Panel', {
+        bodyPadding: 10
+    });
+
+    var textfield = Ext.create('Ext.form.field.Text', {
+        emptyText: 'user id'
+    });
+
+    var button = Ext.create('Ext.button.Button', {
+        text: 'click me!',
+        handler: function() {
+            alert('button clicked!');
+        }
+    });
+
+    panel.add(textfield, button);
+    win.add(panel);
+
+    win.show();
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>

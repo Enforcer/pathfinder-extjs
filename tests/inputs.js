@@ -1,7 +1,7 @@
 var pathfinder = require('../extjs-pathfinder');
 
 casper.test.begin('Ext4 input basic test', 3, function suite(test) {
-    var site = 'https://docs.sencha.com/extjs/4.2.3/extjs-build/examples/build/KitchenSink/ext-theme-neptune/#login-form';
+    var site = 'http://127.0.0.1:8001/ext4_01.html';
     var inputs;
     var pathfinderObj;
 

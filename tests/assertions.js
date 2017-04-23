@@ -1,7 +1,7 @@
 var pathfinder = require('../extjs-pathfinder');
 
 casper.test.begin('Ext4 simple assertions test', 4, function suite(test) {
-    var site = 'https://docs.sencha.com/extjs/4.2.3/extjs-build/examples/build/KitchenSink/ext-theme-neptune/#basic-buttons';
+    var site = 'http://127.0.0.1:8001/ext4_01.html';
     var buttons;
     var firstButton
     var pathfinderObj;
