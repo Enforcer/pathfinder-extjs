@@ -6,17 +6,19 @@ casper.test.begin('Ext4 input basic test', 3, function suite(test) {
     var pathfinderObj;
 
     casper.start(site, function() {
-        pathfinderObj = pathfinder.brief(this, function () {
-            return Ext;
+        casper.waitForText('Example window', function then() {
+            pathfinderObj = pathfinder.brief(this, function () {
+                return Ext;
+            });
+
+            inputs = pathfinderObj.find('textfield[emptyText="user id"]');
+            casper.test.assert(inputs.length > 0, 'Input for user id not found!');
+
+            casper.test.assert(
+                pathfinderObj.getValue(inputs[0]) == '',
+                'Input\'s value is not empty'
+            );
         });
-
-        inputs = pathfinderObj.find('textfield[emptyText="user id"]');
-        casper.test.assert(inputs.length > 0, 'Input for user id not found!');
-
-        casper.test.assert(
-            pathfinderObj.getValue(inputs[0]) == '',
-            'Input\'s value is not empty'
-        );
     });
 
     casper.then(function() {
