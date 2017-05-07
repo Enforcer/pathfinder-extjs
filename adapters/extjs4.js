@@ -19,6 +19,30 @@ function click(cmpId) {
     }, this.getExtJs, cmpId);
 }
 
+function showMenu(cmpId) {
+    return this.casperObj.evaluate(function (getExtJs, cmpId) {
+        var cmp = getExtJs().getCmp(cmpId);
+        if (!cmp) {
+            throw 'Component ' + cmp + ' not found!';
+        } else if (cmp.xtype !== 'splitbutton') {
+            throw 'Component ' + cmp + ' is not a split button!';
+        }
+        return cmp.showMenu();
+    }, this.getExtJs, cmpId);
+}
+
+function hideMenu(cmpId) {
+    return this.casperObj.evaluate(function (getExtJs, cmpId) {
+        var cmp = getExtJs().getCmp(cmpId);
+        if (!cmp) {
+            throw 'Component ' + cmp + ' not found!';
+        } else if (cmp.xtype !== 'splitbutton') {
+            throw 'Component ' + cmp + ' is not a split button!';
+        }
+        return cmp.hideMenu();
+    }, this.getExtJs, cmpId);
+}
+
 function sendKeys(cmpId, keys) {
     return this.casperObj.evaluate(function (getExtJs, cmpId, keys) {
         var cmp = getExtJs().getCmp(cmpId);
@@ -63,7 +87,7 @@ function assertNotVisible(cmpId) {
             }
             return cmp.isVisible && !cmp.isVisible();
         }, this.getExtJs, cmpId),
-    'Component' + cmpId + ' should not be visible');
+    'Component ' + cmpId + ' should not be visible');
 }
 
 function assertEnabled(cmpId) {
@@ -75,7 +99,7 @@ function assertEnabled(cmpId) {
             }
             return cmp.isDisabled && !cmp.isDisabled();
         }, this.getExtJs, cmpId),
-    'Component' + cmpId + ' should be enabled');
+    'Component ' + cmpId + ' should be enabled');
 }
 
 function assertDisabled(cmpId) {
@@ -87,7 +111,7 @@ function assertDisabled(cmpId) {
             }
             return cmp.isDisabled && cmp.isDisabled();
         }, this.getExtJs, cmpId),
-    'Component' + cmpId + ' should be disabled');
+    'Component ' + cmpId + ' should be disabled');
 }
 
 
@@ -98,6 +122,8 @@ module.exports = {
 
         this.find = find.bind(this);
         this.click = click.bind(this);
+        this.showMenu = showMenu.bind(this);
+        this.hideMenu = hideMenu.bind(this);
         this.sendKeys = sendKeys.bind(this);
         this.getValue = getValue.bind(this);
 

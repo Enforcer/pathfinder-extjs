@@ -33,7 +33,17 @@ Ext.onReady(function () {
         }
     });
 
-    panel.add(textfield, button);
+    var splitButton = Ext.create('Ext.button.Split', {
+        text: 'Next action',
+        menu: Ext.create('Ext.menu.Menu', {
+            items: [
+                {text: 'Item 1'},
+                {text: 'Item 2'}
+            ]
+        })
+    });
+
+    panel.add(textfield, button, splitButton);
     win.add(panel);
 
     win.show();
