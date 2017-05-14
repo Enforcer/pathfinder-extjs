@@ -66,6 +66,35 @@ function getValue(cmpId) {
     }, this.getExtJs, cmpId);
 }
 
+function getProperty(cmpId, property) {
+    return this.casperObj.evaluate(function (getExtJs, cmpId, property) {
+        var cmp = getExtJs().getCmp(cmpId);
+        if (!cmp) {
+            throw 'Component ' + cmp + ' not found!';
+        }
+        return cmp[property];
+    }, this.getExtJs, cmpId, property);
+}
+
+function closeWindow(cmpId) {
+    return this.casperObj.evaluate(function (getExtJs, cmpId) {
+        var cmp = getExtJs().getCmp(cmpId);
+        if (!cmp) {
+            throw 'Component ' + cmp + ' not found!';
+        } else if (cmp.xtype !== 'window') {
+            throw 'Component ' + cmp + ' is not a window!';
+        }
+        var closeTool = cmp.query('tool[type="close"]');
+        if (!closeTool) {
+            throw 'Window ' + cmp + ' has no close button in the header!';
+        }
+        var clickEvent = new Event('click');
+        clickEvent.button = 0;
+        clickEvent.stopEvent = function() {};
+        return closeTool[0].onClick(clickEvent);
+    }, this.getExtJs, cmpId);
+}
+
 function assertVisible(cmpId) {
     this.casperObj.test.assert(
         this.casperObj.evaluate(function (getExtJs, cmpId) {
@@ -126,6 +155,8 @@ module.exports = {
         this.hideMenu = hideMenu.bind(this);
         this.sendKeys = sendKeys.bind(this);
         this.getValue = getValue.bind(this);
+        this.getProperty = getProperty.bind(this);
+        this.closeWindow = closeWindow.bind(this);
 
         this.assert = {
             assertVisible: assertVisible.bind(this),
